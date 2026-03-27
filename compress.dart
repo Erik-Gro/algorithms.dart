@@ -1,50 +1,45 @@
-
-
-
 import 'dart:io';
 
-void main() {
-  stdout.write('Enter a string to compress: ');
-  String input = stdin.readLineSync() ?? '';
+void main(List<String> arguments) {
+  String input;
+
+  if (arguments.isNotEmpty) {
+    input = arguments[0];
+  } else {
+    stdout.write('Enter a string to compress: ');
+    input = stdin.readLineSync() ?? '';
+  }
+
+  if (input.isEmpty) return;
   print(compressed(input));
 }
 
 String compressed(String string) {
-  String compressed = "";
-  String letter = string[0];
-  int middlePointer = 1;
-  int counter = 1;
-  int finding = 0;
+  String result = "";
 
-  while (middlePointer < string.length) {
-    if (string[middlePointer] == string[finding]) {
-      counter++;
-    } if (string[middlePointer] != string[finding]) {
-      if(counter == 1) {
-        compressed += letter;
+  for (int i = 0; i < string.length;) {
+    int count = 1;
+    String left = string[i];
+    int j = i + 1;
+
+    while (j <= string.length - 1) {
+      if (string[j] == left) {
+        count++;
+        j++;
+        continue;
       }
-      else if (counter == 2) {
-        compressed += '$letter$letter';
-      }
-       else {
-        compressed += '$letter$counter';
-      }
-      letter = string[middlePointer];
-      finding = middlePointer;
-      counter = 1;
-       }
-    if (middlePointer == string.length - 1) {
-      if(counter == 1) {
-        compressed += letter;
-      }
-      else if (counter == 2) {
-        compressed += '$letter$letter';
-      }
-       else {
-        compressed += '$letter$counter';
-      }
+      break;
     }
-    middlePointer++;
+
+    switch (count) {
+      case > 2:
+        result += '$left$count';
+      case == 2:
+        result += '$left$left';
+      default:
+        result += left;
+    }
+    i = j;
   }
-  return compressed;
+  return result;
 }
