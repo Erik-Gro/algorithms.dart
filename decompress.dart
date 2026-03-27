@@ -13,7 +13,12 @@ void main() {
 String decompress(String string){
   String result = "";
 
-  for(int i = 0; i < string.length -1; i++) {
+  for(int i = 0; i < string.length; i++) {
+
+    if(i + 1 == string.length) {
+      result += string[i];
+      continue;
+    }
     if(int.tryParse(string[i+1]) != null) {
       int counter = int.parse(string[i+1]);
       for(int j = 0; j < counter; j++) {
