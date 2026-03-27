@@ -10,28 +10,23 @@ void main() {
   print(decompress(input));
 }
 
-String decompress(String string) {
-  if (string.isEmpty) return "";
-
+String decompress(String string){
   String result = "";
-  
-  for (int i = 0; i < string.length; i++) {
-    String currentLetter = string[i];
-    String fullNumber = "";
 
-    while (i + 1 < string.length && int.tryParse(string[i + 1]) != null) {
-      fullNumber += string[i + 1];
-      i++; 
-    }
-
-    if (fullNumber.isEmpty) {
-      result += currentLetter;
-    } else {
-      int multiplier = int.parse(fullNumber);
-      for (int j = 0; j < multiplier; j++) {
-        result += currentLetter;
+  for(int i = 0; i < string.length -1; i++) {
+    if(int.tryParse(string[i+1]) != null) {
+      int counter = int.parse(string[i+1]);
+      for(int j = 0; j < counter; j++) {
+        result += string[i];
       }
+      i++;
+      continue;
     }
+    if(string[i] == string[i+1]) {
+      result += string[i];
+      continue;
+    }
+    result += string[i];
   }
   return result;
 }
