@@ -5,7 +5,13 @@
     "vscode": {
       "extensions": [
         "dart-code.dart-code"
-      ]
+      ],
+      "settings": {
+        "editor.formatOnSave": true,
+        "[dart]": {
+          "editor.defaultFormatter": "Dart-Code.dart-code"
+        }
+      }
     }
   }
 }
