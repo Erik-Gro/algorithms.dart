@@ -9,7 +9,7 @@ void main() {
 String decompress(String string) {
   String result = "";
   print(string.length);
-  for (int i = 0; i < string.length - 1; i++) {
+  for (int i = 0; i < string.length; i++) {
     // if (i + 1 == string.length) {
     //   result += string[i];
     //   continue;
@@ -39,7 +39,7 @@ String decompress(String string) {
       // i++;
       continue;
     }
-    if (string[i] == string[i + 1]) {
+    if (i +1 == string.length) {
       result += string[i];
       continue;
     }
